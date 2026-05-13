@@ -24,15 +24,15 @@ Name: Enquote...
 Title: Replace line breaks by commas, while enquoting the parts
 Description: Replace all the line breaks in the currently selected text by commas and enquote the parts
 Binding: enquote
-Interactive: true
+Interactive: false
 
 
 
 Name: Sort Lines...
-Title: Sort the Selected Text (ascending)
-Description: Sorts the selected text in ascending order
-Binding: SortAsc
-Interactive: true
+Title: Sort the Selected Text 
+Description: Sorts the selected text in different orders
+Binding: sortLines
+Interactive: false
 
 
 
@@ -40,14 +40,14 @@ Name: Flush to Source
 Title: Replace selection with its dput result
 Description: Replace selection with its dput result
 Binding: flushToSource
-Interactive: true
+Interactive: false
 
 
 Name: Remove Duplicates
 Title: Remove Duplicates
 Description: Remove all duplicates linewise in the currently selected text
 Binding: removeDuplicates
-Interactive: true
+Interactive: false
 
 
 
@@ -66,6 +66,11 @@ Interactive: true
 
 
 
+
+Name: Example
+Description: Run example() on selected text
+Binding: xExample
+Interactive: false
 
 Name: Select
 Description: Select different things
@@ -91,7 +96,6 @@ Name: Desc
 Description: Run desc() on selected text
 Binding: xDesc
 Interactive: false
-
 
 Name: Abstract
 Description: Run abstract() on selected text

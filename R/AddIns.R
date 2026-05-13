@@ -32,82 +32,6 @@ Example <- function(){
 
 
 
-Select <- function(){
-
-  selkey <- getOption("selkey", default=list(file=c("fn","file","filename"),
-                                             dir=c("path","dir", "pathname"),
-                                             col=c("color", "col"),
-                                             pch=c("pch"), locate=c("loc","xy"), 
-                                             bookmark=c("wbm", "bmt")))
-  
-  sel <- rstudioapi::getActiveDocumentContext()$selection[[1]]$text
-  if(sel != "") {
-    if(sel %in% selkey$pch) {
-      
-          pch <- pchPicker()
-          if(!is.null(pch))
-            txt <- gettextf('pch=%s, col="%s", bg="%s"', pch[["pch"]], pch[["col"]], pch[["bg"]])
-            rstudioapi::insertText(txt)
-        
-    } else if(sel %in% selkey$col){
-        txt <- eval(parse(text="ColPicker(newwin=TRUE)"))
-        dev.off()
-        rstudioapi::insertText(gettextf("col=c(%s)", paste(shQuote(txt), collapse=", ")))
-
-    } else if(sel %in% selkey$file) {
-      txt <- eval(parse(text="FileOpenDlg(fmt='%path%%fname%.%ext%')"))
-      if(txt != "")
-        rstudioapi::insertText(gettextf("%s=%s", sel, shQuote(txt)))
-
-    } else if(sel %in% selkey$dir) {
-      txt <- eval(parse(text="dir.choose()"))
-      if(txt != "")
-        rstudioapi::insertText(gettextf("%s=%s", sel, shQuote(txt)))
-
-    } else if(sel %in% selkey$locate) {
-      xy <- eval(parse(text="locator()"))
-      if(!is.null(xy)){
-        txt <- gettextf("%s <- list(\n  x = c(%s),\n  y = c(%s),\n  xlab = '$x', ylab = '$y')", 
-                        sel, paste(xy$x, collapse=", "), paste(xy$y, collapse=", "))
-
-        .InsertSelectedText(txt)
-      }
-      
-    } else if(sel %in% selkey$bookmark) {
-      eval(parse(text="SelectDlgBookmark()"))
-
-    } else {
-      if(sel != ""){
-        txt <- eval(parse(text=gettextf("selectVarDlg(%s)", sel)))
-        if(txt != "") rstudioapi::insertText(txt)
-      }
-    }
-  } else {
-    cat("No selection!\n")
-  }
-  
-  invisible()
-
-}
-
-
-
-.InsertSelectedText <- function(txt){
-  
-  rng <- rstudioapi::getActiveDocumentContext()
-  
-  # store selection
-  sel <- rng$selection[[1]]$range
-  
-  # insert the text
-  rstudioapi::modifyRange(txt)
-  
-  # select inserted text
-  nsel <- rstudioapi::getActiveDocumentContext()$selection[[1]]$range
-  sel$end <- nsel$start
-  rstudioapi::setSelectionRanges(sel)
-  
-}
 
 
 
@@ -180,7 +104,7 @@ Info <- function(){
 
 FileOpen <- function(){
 
-  txt <- eval(parse(text="FileOpenDlg(fmt=NULL)"))
+  txt <- eval(parse(text="fileOpenDlg(fmt=NULL)"))
   if(txt != "") {
     rstudioapi::insertText(txt)
   }
@@ -361,7 +285,7 @@ InspectPnt <- function(){
 
   requireNamespace("DescToolsX")
 
-  .ToClipboard <- function (x, ...) {
+  .toClipboard <- function (x, ...) {
 
     sn <- Sys.info()["sysname"]
     if (sn == "Darwin") {
@@ -384,7 +308,7 @@ InspectPnt <- function(){
   if(sel != ""){
     i <- eval(parse(text=gettextf("DescToolsX::IdentifyA(%s, poly=TRUE)", sel)))
 
-    .ToClipboard(paste("c(", paste(i, collapse=","), ")", sep=""))
+    .toClipboard(paste("c(", paste(i, collapse=","), ")", sep=""))
 
     # Todo:
     # Display directly by looking up the data in the formula

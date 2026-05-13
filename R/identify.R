@@ -1,6 +1,12 @@
 
 
 
+.contains_plot_call <- function(expr){
+  NULL
+}
+
+
+
 .extract_xy <- function(sel, parent = parent.frame()) {
   
   if (getOption("debug", FALSE)) {

@@ -5,7 +5,7 @@ buildModel <- function(){
   
   sel <- rstudioapi::getActiveDocumentContext()$selection[[1]]$text
   if(sel==""){
-    lst <- .LsDataFrame()
+    lst <- .globalDataFrames()
     if(!is.null(lst)){
       sel <- selectVarDlg(x = lst)[1]
       if(!is.null(sel)){
@@ -24,6 +24,7 @@ buildModel <- function(){
   invisible()
   
 }
+
 
 
 # http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/ttk-Label.html
@@ -470,5 +471,16 @@ buildModel <- function(){
 
 
 
+# == internal helper functions ================================================
+
+.globalDataFrames <- function() {
+  
+  objs <- eapply(
+    .GlobalEnv,
+    is.data.frame
+  )
+  
+  names(objs)[unlist(objs)]
+}
 
 

@@ -43,6 +43,12 @@ xSummary <- function()  .execFunction("summary")
 
 
 
+#' xExample
+#' Run example() on selected text.
+#' @export
+xExample <- function()  .execFunction("example")
+
+
 
 
 # == internal helper functions =================================================

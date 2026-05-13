@@ -29,6 +29,7 @@
 #' @importFrom bedrock label strX splitPath
 #' @importFrom cli cli_alert_info cli_alert_success cli_alert_danger
 #' @importFrom writexl write_xlsx
+#' @importFrom clipr write_clip
 NULL           
 
 
