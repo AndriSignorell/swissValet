@@ -1,0 +1,115 @@
+
+
+Name: File Save As...
+Title: Display filedialog and save selected object
+Description: Save current selection as object in several formats as binary, text, csv, xlsx
+Binding: fileSaveAs
+Interactive: true
+
+Name: File Plot Save As... 
+Description: Looks for plot code in comments and executes it.
+Binding: SavePlot
+Interactive: true
+
+
+
+Name: Build Model Formula...
+Title: Run ModelDlg() on the current selection
+Description: Display dialog to compose a model formula, using variables from the data.frame which name is currently selected
+Binding: buildModel
+Interactive: false
+
+
+Name: Enquote...
+Title: Replace line breaks by commas, while enquoting the parts
+Description: Replace all the line breaks in the currently selected text by commas and enquote the parts
+Binding: enquote
+Interactive: true
+
+
+
+Name: Sort Lines...
+Title: Sort the Selected Text (ascending)
+Description: Sorts the selected text in ascending order
+Binding: SortAsc
+Interactive: true
+
+
+
+Name: Flush to Source
+Title: Replace selection with its dput result
+Description: Replace selection with its dput result
+Binding: flushToSource
+Interactive: true
+
+
+Name: Remove Duplicates
+Title: Remove Duplicates
+Description: Remove all duplicates linewise in the currently selected text
+Binding: removeDuplicates
+Interactive: true
+
+
+
+Name: Identify Points
+Title: Identify Points on a Plot
+Description: Launch IdentifyA() with the current selection as argument and returns the selected points on the plot.
+Binding: InspectPnt
+Interactive: true
+
+
+Name: Identify Area
+Title: Identify Points on a Plot
+Description: Launch IdentifyA() with the current selection as argument and returns the selected points on the plot.
+Binding: InspectPnt
+Interactive: true
+
+
+
+
+Name: Select
+Description: Select different things
+Binding: Select
+Interactive: false
+
+Name: Head
+Description: Run head() on selected text
+Binding: xHead
+Interactive: false
+
+Name: StrX
+Description: Run strX() on selected text
+Binding: xStrX
+Interactive: false
+
+Name: Unclass
+Description: Run unclass() on selected text
+Binding: xUnclass
+Interactive: false
+
+Name: Desc
+Description: Run desc() on selected text
+Binding: xDesc
+Interactive: false
+
+
+Name: Abstract
+Description: Run abstract() on selected text
+Binding: xAbstract
+Interactive: false
+
+
+Name: Summary
+Description: Run summary() on selected text
+Binding: xSummary
+Interactive: false
+
+
+Name: Flip Slashes
+Title: Replace backslashes \ by simple slashes /
+Description: Replace all backslashes in the currently selected text by simple slashes. If there are only slashes they'll be replaced by backslashes.
+Binding: cycleSlashes
+Interactive: false
+
+
+

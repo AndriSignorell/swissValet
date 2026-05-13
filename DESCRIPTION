@@ -1,0 +1,20 @@
+Package: swissButler
+Type: Package
+Title: Interactive Functions to be Used as Shortcuts in 'RStudio'
+Version: 0.0.0.901
+Date: 2026-05-12
+Authors@R: person(given = "Andri",
+                  family = "Signorell",
+                  role = c("aut", "cre"),
+                  email = "andri@signorell.net",
+                  comment = c(ORCID = "0000-0003-4311-1969"))
+Description: 'RStudio' as of recently offers the option to define addins and assign shortcuts to them. This package contains addins for a few most frequently used functions in a data scientist's (at least mine) daily work (like str(), example(), plot(), head(), view(), desc()). Most of these functions will use the current selection in the editor window and send the specific command to the console while instantly executing it. Assigning shortcuts to these addins will save you quite a few keystrokes.
+Depends: base, stats, R (>= 4.2.0)
+Imports: DescToolsX, aurora, bedrock, rstudioapi (>= 0.1), 
+         writexl, foreign, tools, tcltk, cli
+URL: https://github.com/AndriSignorell/swissButler/
+BugReports: https://github.com/AndriSignorell/swissButler/issues
+License: GPL (>= 2)
+LazyLoad: yes
+Encoding: UTF-8
+Config/roxygen2/version: 8.0.0
