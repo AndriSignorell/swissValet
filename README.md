@@ -1,13 +1,13 @@
-# swissButler
+# swissValet
 
 <img src="man/figures/logo.png" align="right" width="120"/>
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/AndriSignorell/swissButler/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AndriSignorell/swissButler/actions)
+[![R-CMD-check](https://github.com/AndriSignorell/swissValet/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AndriSignorell/swissValet/actions)
 [![License: GPL (>=2)](https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 <!-- badges: end -->
 
-`swissButler` is a collection of interactive RStudio helper functions and addins designed to reduce friction during daily data analysis work.
+`swissValet` is a collection of interactive RStudio helper functions and addins designed to reduce friction during daily data analysis work.
 
 The package focuses on:
 
@@ -26,14 +26,14 @@ Most functions operate directly on the current editor selection and are intended
 ## Installation
 
 ```r
-remotes::install_github("AndriSignorell/swissButler")
+remotes::install_github("AndriSignorell/swissValet")
 ```
 
 ---
 
 # Philosophy
 
-`swissButler` is intentionally pragmatic.
+`swissValet` is intentionally pragmatic.
 
 The package contains many small utilities that save:
 
@@ -299,7 +299,7 @@ is immediately executed in the console.
 
 # Dependencies
 
-`swissButler` builds upon:
+`swissValet` builds upon:
 
 - `rstudioapi`
 - `tcltk`
@@ -314,7 +314,7 @@ is immediately executed in the console.
 
 # Status
 
-`swissButler` is under active development and intentionally experimental in parts.
+`swissValet` is under active development and intentionally experimental in parts.
 
 The package prioritizes:
 
@@ -341,5 +341,5 @@ GPL (>= 2)
 
 # Links
 
-- GitHub: https://github.com/AndriSignorell/swissButler
-- Issues: https://github.com/AndriSignorell/swissButler/issues
+- GitHub: https://github.com/AndriSignorell/swissValet
+- Issues: https://github.com/AndriSignorell/swissValet/issues

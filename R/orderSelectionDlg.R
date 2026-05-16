@@ -106,7 +106,7 @@ sortLines <- function(){
   ico <- system.file(
     "extdata",
     "R.ico",
-    package = "swissButler"
+    package = "swissValet"
   )
   
   if (file.exists(ico)) {

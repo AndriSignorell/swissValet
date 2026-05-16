@@ -1,7 +1,7 @@
-Package: swissButler
+Package: swissValet
 Type: Package
 Title: Interactive Functions to be Used as Shortcuts in 'RStudio'
-Version: 0.0.0.902
+Version: 0.0.0.903
 Date: 2026-05-13
 Authors@R: person(given = "Andri",
                   family = "Signorell",
@@ -12,8 +12,8 @@ Description: 'RStudio' as of recently offers the option to define addins and ass
 Depends: base, stats, R (>= 4.2.0)
 Imports: DescToolsX, aurora, bedrock, rstudioapi (>= 0.1), 
          writexl, foreign, tools, tcltk, cli, clipr
-URL: https://github.com/AndriSignorell/swissButler/
-BugReports: https://github.com/AndriSignorell/swissButler/issues
+URL: https://github.com/AndriSignorell/swissValet/
+BugReports: https://github.com/AndriSignorell/swissValet/issues
 License: GPL (>= 2)
 LazyLoad: yes
 Encoding: UTF-8
