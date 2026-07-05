@@ -26,16 +26,16 @@
 
 
 #' @keywords internal
-.getImg <- function(fname){
+.getImg <- function(file){
   
   # looks for files either in /extdata  or in /inst/extdata
   path <- find.package(.thisPackage())
   
-  res <- file.path(path, "extdata", fname)
+  res <- file.path(path, "extdata", file)
   if(file.exists(res))
     return(res)
   
-  res <- file.path(path, "inst","extdata", fname)
+  res <- file.path(path, "inst","extdata", file)
   if(file.exists(res))
     return(res)
   

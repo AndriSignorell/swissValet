@@ -50,6 +50,20 @@ xExample <- function()  .execFunction("example")
 
 
 
+#' xExample
+#' Run example() on selected text.
+#' @export
+xPlot <- function()  .execFunction("plot")
+
+
+
+#' xExample
+#' Run strX() on selected text display first element only.
+.str1 <- function(x) DescToolsX::strX(s, max.level=1)
+xStr1 <- function()  .execFunction(".str1")
+
+
+
 
 # == internal helper functions =================================================
 

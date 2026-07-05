@@ -24,7 +24,7 @@ Select <- function(){
       
     } else if(sel %in% selkey$file) {
       
-      txt <- fileOpenDlg( fmt = "%path%%fname%.%ext%" )
+      txt <- fileOpenDlg( fmt = "%path%%file%.%ext%" )
       
       if( is.character(txt) && length(txt) == 1L && nzchar(txt) ) {
         rstudioapi::insertText( sprintf("%s=%s", sel, shQuote(txt)) )
@@ -109,7 +109,7 @@ fileOpenDlg <- function(
     "/"
   )
   
-  fname <- tools::file_path_sans_ext(
+  file <- tools::file_path_sans_ext(
     basename(fn)
   )
   
@@ -123,7 +123,7 @@ fileOpenDlg <- function(
   
   if (
     length(fmt) == 1L &&
-    grepl("%path%|%fname%|%ext%", fmt)
+    grepl("%path%|%file%|%ext%", fmt)
   ) {
     
     txt <- fmt
@@ -136,8 +136,8 @@ fileOpenDlg <- function(
     )
     
     txt <- gsub(
-      "%fname%",
-      fname,
+      "%file%",
+      file,
       txt,
       fixed = TRUE
     )
@@ -200,7 +200,7 @@ fileOpenDlg <- function(
         'strip.white = TRUE',
         ')'
       ),
-      fname,
+      file,
       fn
     ),
     

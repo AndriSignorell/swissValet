@@ -1,7 +1,7 @@
 Package: swissValet
 Type: Package
 Title: Interactive Functions to be Used as Shortcuts in 'RStudio'
-Version: 0.0.0.903
+Version: 0.0.0.904
 Date: 2026-05-13
 Authors@R: person(given = "Andri",
                   family = "Signorell",

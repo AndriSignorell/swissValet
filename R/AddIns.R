@@ -9,57 +9,58 @@
 
 
 
-Str1 <- function(){
-  
-  requireNamespace("DescToolsX")
-  
-  sel <- rstudioapi::getActiveDocumentContext()$selection[[1]]$text
-  if(sel != "") {
-    rstudioapi::sendToConsole(gettextf("DescToolsX::strX(%s, max.level=1)", sel), focus = FALSE)
-  } else {
-    cat("No selection!\n")
-  }
-}
+# Str1 <- function(){
+#   
+#   requireNamespace("DescToolsX")
+#   
+#   sel <- rstudioapi::getActiveDocumentContext()$selection[[1]]$text
+#   if(sel != "") {
+#     rstudioapi::sendToConsole(gettextf("DescToolsX::strX(%s, max.level=1)", sel), focus = FALSE)
+#   } else {
+#     cat("No selection!\n")
+#   }
+# }
 
-Example <- function(){
-  sel <- rstudioapi::getActiveDocumentContext()$selection[[1]]$text
-  if(sel != "") {
-    rstudioapi::sendToConsole(gettextf("example(%s)", sel), focus = FALSE)
-  } else {
-    cat("No selection!\n")
-  }
-}
-
-
-
-
+# 
+# Example <- function(){
+#   sel <- rstudioapi::getActiveDocumentContext()$selection[[1]]$text
+#   if(sel != "") {
+#     rstudioapi::sendToConsole(gettextf("example(%s)", sel), focus = FALSE)
+#   } else {
+#     cat("No selection!\n")
+#   }
+# }
+# 
 
 
-Plot <- function(){
-  sel <- rstudioapi::getActiveDocumentContext()$selection[[1]]$text
-  if(sel != "") {
-    if(sel=="mar")
-      rstudioapi::sendToConsole("PlotMar()", focus = FALSE)
-    else
-      rstudioapi::sendToConsole(gettextf("plot(%s)", sel), focus = FALSE)
-  } else {
-    cat("No selection!\n")
-  }
-}
 
-
-PlotD <- function(){
-
-  requireNamespace("DescToolsX")
-
-  sel <- rstudioapi::getActiveDocumentContext()$selection[[1]]$text
-  if(sel != "") {
-    rstudioapi::sendToConsole(gettextf("plot(DescToolsX::desc(%s))", sel), focus = FALSE)
-  } else {
-    cat("No selection!\n")
-  }
-}
-
+# 
+# 
+# Plot <- function(){
+#   sel <- rstudioapi::getActiveDocumentContext()$selection[[1]]$text
+#   if(sel != "") {
+#     if(sel=="mar")
+#       rstudioapi::sendToConsole("PlotMar()", focus = FALSE)
+#     else
+#       rstudioapi::sendToConsole(gettextf("plot(%s)", sel), focus = FALSE)
+#   } else {
+#     cat("No selection!\n")
+#   }
+# }
+# 
+# 
+# PlotD <- function(){
+# 
+#   requireNamespace("DescToolsX")
+# 
+#   sel <- rstudioapi::getActiveDocumentContext()$selection[[1]]$text
+#   if(sel != "") {
+#     rstudioapi::sendToConsole(gettextf("plot(DescToolsX::desc(%s))", sel), focus = FALSE)
+#   } else {
+#     cat("No selection!\n")
+#   }
+# }
+# 
 
 
 
@@ -164,79 +165,6 @@ IntView <- function(){
     cat("No selection!\n")
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-SortAsc <- function(){
-  
-  rng <- rstudioapi::getActiveDocumentContext()
-  txt <- rstudioapi::getActiveDocumentContext()$selection[[1]]$text
-
-  if(txt != "") {
-    rep_txt <- paste(sort(strsplit(txt, split="\n")[[1]]), collapse="\n")
-    if(length(grep("\\n$", txt))!=0)
-      rep_txt <- paste0(rep_txt, "\n")
-    
-    rstudioapi::modifyRange(rep_txt)
-    rstudioapi::setSelectionRanges(rng$selection[[1]]$range)
-    
-  } else {
-    cat("No selection!\n")
-  }
-  
-  
-}
-
-
-SortDesc <- function(){
-  rng <- rstudioapi::getActiveDocumentContext()
-  txt <- rstudioapi::getActiveDocumentContext()$selection[[1]]$text
-  
-  if(txt != "") {
-    rep_txt <- paste(sort(strsplit(txt, split="\n")[[1]], decreasing = TRUE), collapse="\n")
-    if(length(grep("\\n$", txt))!=0)
-      rep_txt <- paste0(rep_txt, "\n")
-    rstudioapi::modifyRange(rep_txt)
-    rstudioapi::setSelectionRanges(rng$selection[[1]]$range)
-    
-  } else {
-    cat("No selection!\n")
-  }
-  
-  
-}
-
-
-Shuffle <- function(){
-  
-  rng <- rstudioapi::getActiveDocumentContext()
-  txt <- rstudioapi::getActiveDocumentContext()$selection[[1]]$text
-  
-  if(txt != "") {
-    rep_txt <- paste(sample(strsplit(txt, split="\n")[[1]]), collapse="\n")
-    if(length(grep("\\n$", txt))!=0)
-      rep_txt <- paste0(rep_txt, "\n")
-    
-    rstudioapi::modifyRange(rep_txt)
-    rstudioapi::setSelectionRanges(rng$selection[[1]]$range)
-    
-  } else {
-    cat("No selection!\n")
-  }
-  
-  
-}
-
-
 
 
 
