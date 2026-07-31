@@ -25,8 +25,8 @@
  
 #' @importFrom utils capture.output edit object.size select.list
 
-#' @importFrom aurora fm strTrim strExtract strTrunc pal
-#' @importFrom bedrock label strX splitPath
+#' @importFrom pharos fm strTrim strExtract strTrunc pal
+#' @importFrom bedrock label strX splitPath mGsub
 #' @importFrom cli cli_alert_info cli_alert_success cli_alert_danger
 #' @importFrom writexl write_xlsx
 #' @importFrom clipr write_clip

@@ -116,4 +116,12 @@ Binding: cycleSlashes
 Interactive: false
 
 
+Name: Toggle Unicode
+Title: Replace umlaute by their Unicode codes and vice versa
+Description: Replace all deutsche Umlaute in the currently selected text by their UTF codes.
+Binding: toggleUnicodeAddin
+Interactive: false
+
+
+
 
