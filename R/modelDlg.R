@@ -27,59 +27,6 @@ buildModel <- function(){
 
 
 
-# http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/ttk-Label.html
-# good documentation
-# http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/index.html
-
-# Tooltip for an arbitrary Tk widget, without a tcltk2 dependency.
-# text: a character string, or a function returning the text at hover time
-#       (so the current content of a tclVar is always shown).
-.TkTip <- function(widget, text, delay = 400, wraplength = 400) {
-
-  tip <- NULL   # toplevel of the tooltip
-  aid <- NULL   # id of the pending after event
-
-  hide <- function() {
-    if(!is.null(aid)) { tcltk::tcl("after", "cancel", aid); aid <<- NULL }
-    if(!is.null(tip)) { tcltk::tkdestroy(tip); tip <<- NULL }
-  }
-
-  show <- function() {
-
-    aid <<- NULL
-    txt <- if(is.function(text)) text() else text
-    if(length(txt) != 1L || is.na(txt) || !nzchar(strTrim(txt)))
-      return(invisible())
-
-    tip <<- tcltk::tktoplevel(widget)
-    tcltk::tkwm.overrideredirect(tip, TRUE)
-    try(tcltk::tkwm.attributes(tip, topmost = TRUE), silent = TRUE)
-    if(Sys.info()[["sysname"]] == "Darwin")
-      try(tcltk::tcl("::tk::unsupported::MacWindowStyle", "style", tip,
-                     "help", "noActivates"), silent = TRUE)
-
-    tcltk::tkpack(tcltk::tklabel(tip, text = txt, justify = "left",
-                                 background = "#FFFFE1", foreground = "#333333",
-                                 relief = "solid", borderwidth = 1,
-                                 wraplength = wraplength, padx = 4, pady = 2))
-
-    # place at the mouse pointer, slightly offset, so the window does not end up
-    # under the cursor and trigger <Leave> flickering
-    xy <- as.integer(c(tcltk::tclvalue(tcltk::tkwinfo("pointerx", widget)),
-                       tcltk::tclvalue(tcltk::tkwinfo("pointery", widget))))
-    tcltk::tkwm.geometry(tip, gettextf("+%s+%s", xy[1] + 12, xy[2] + 20))
-  }
-
-  tcltk::tkbind(widget, "<Enter>", function() {
-    hide()
-    aid <<- tcltk::tclvalue(tcltk::tcl("after", delay, show))
-  })
-  tcltk::tkbind(widget, "<Leave>", hide)
-  tcltk::tkbind(widget, "<ButtonPress>", hide)
-
-  invisible(widget)
-}
-
 
 .modelDlg <- function(x, ...){
   
@@ -356,8 +303,9 @@ buildModel <- function(){
   tcltk::tkgrid.configure(var.scr, sticky = "news")
 
   # quicktip showing the untruncated label text
-  .TkTip(tfVarDesc, function() tcltk::tclvalue(tftip))
-  .TkTip(tfVarLabel, function() tcltk::tclvalue(tftip))
+  # (set debug = TRUE to trace <Enter> and the tip window on the console)
+  .TkTip(tfVarDesc, function() tcltk::tclvalue(tftip), parent = root)
+  .TkTip(tfVarLabel, function() tcltk::tclvalue(tftip), parent = root)
   # tcltk2::tk2tip(tlist.var, "List of variables in data frame")
   
   # Buttons
