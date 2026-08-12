@@ -108,6 +108,16 @@ Description: Run summary() on selected text
 Binding: xSummary
 Interactive: false
 
+Name: Plot
+Description: Run plot() on selected text
+Binding: xPlot
+Interactive: false
+
+Name: Example
+Description: Run example() on selected text
+Binding: xExample
+Interactive: false
+
 
 Name: Flip Slashes
 Title: Replace backslashes \ by simple slashes /

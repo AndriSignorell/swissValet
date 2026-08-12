@@ -22,64 +22,78 @@ export(xPlot)
 export(xStrX)
 export(xSummary)
 export(xUnclass)
-importFrom(bedrock,label)
-importFrom(bedrock,mGsub)
-importFrom(bedrock,splitPath)
-importFrom(bedrock,strX)
-importFrom(cli,cli_alert_danger)
-importFrom(cli,cli_alert_info)
-importFrom(cli,cli_alert_success)
+importFrom(bedrock,
+  label,
+  mGsub,
+  splitPath,
+  strX
+)
+importFrom(cli,
+  cli_alert_danger,
+  cli_alert_info,
+  cli_alert_success
+)
 importFrom(clipr,write_clip)
-importFrom(grDevices,col2rgb)
-importFrom(grDevices,colors)
-importFrom(grDevices,dev.cur)
-importFrom(grDevices,dev.list)
-importFrom(grDevices,dev.new)
-importFrom(grDevices,dev.off)
-importFrom(grDevices,dev.set)
-importFrom(grDevices,png)
-importFrom(grDevices,rgb2hsv)
-importFrom(graphics,arrows)
-importFrom(graphics,box)
-importFrom(graphics,grconvertX)
-importFrom(graphics,grconvertY)
-importFrom(graphics,mtext)
-importFrom(graphics,par)
-importFrom(graphics,plot.new)
-importFrom(graphics,points)
-importFrom(graphics,polygon)
-importFrom(graphics,segments)
-importFrom(graphics,text)
-importFrom(pharos,fm)
-importFrom(pharos,pal)
-importFrom(pharos,strExtract)
-importFrom(pharos,strTrim)
-importFrom(pharos,strTrunc)
-importFrom(tcltk,"tclvalue<-")
-importFrom(tcltk,tclVar)
-importFrom(tcltk,tclvalue)
-importFrom(tcltk,tkbind)
-importFrom(tcltk,tkbutton)
-importFrom(tcltk,tkcanvas)
-importFrom(tcltk,tkconfigure)
-importFrom(tcltk,tkcreate)
-importFrom(tcltk,tkdelete)
-importFrom(tcltk,tkdestroy)
-importFrom(tcltk,tkentry)
-importFrom(tcltk,tkfocus)
-importFrom(tcltk,tkframe)
-importFrom(tcltk,tkgetSaveFile)
-importFrom(tcltk,tkgrab.set)
-importFrom(tcltk,tkgrid)
-importFrom(tcltk,tkimage.create)
-importFrom(tcltk,tklabel)
-importFrom(tcltk,tkpack)
-importFrom(tcltk,tktoplevel)
-importFrom(tcltk,tkwait.window)
-importFrom(tcltk,tkwm.title)
-importFrom(tcltk,ttkcombobox)
-importFrom(utils,capture.output)
-importFrom(utils,edit)
-importFrom(utils,object.size)
-importFrom(utils,select.list)
+importFrom(grDevices,
+  col2rgb,
+  colors,
+  dev.cur,
+  dev.list,
+  dev.new,
+  dev.off,
+  dev.set,
+  png,
+  rgb2hsv
+)
+importFrom(graphics,
+  arrows,
+  box,
+  grconvertX,
+  grconvertY,
+  mtext,
+  par,
+  plot.new,
+  points,
+  polygon,
+  segments,
+  text
+)
+importFrom(pharos,
+  fm,
+  pal,
+  strExtract,
+  strTrim,
+  strTrunc
+)
+importFrom(tcltk,
+  "tclvalue<-",
+  tclVar,
+  tclvalue,
+  tkbind,
+  tkbutton,
+  tkcanvas,
+  tkconfigure,
+  tkcreate,
+  tkdelete,
+  tkdestroy,
+  tkentry,
+  tkfocus,
+  tkframe,
+  tkgetSaveFile,
+  tkgrab.set,
+  tkgrid,
+  tkimage.create,
+  tklabel,
+  tkpack,
+  tktoplevel,
+  tkwait.window,
+  tkwm.title,
+  ttkcombobox
+)
+importFrom(utils,
+  capture.output,
+  edit,
+  object.size,
+  select.list
+)
 importFrom(writexl,write_xlsx)

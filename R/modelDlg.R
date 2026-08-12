@@ -31,6 +31,56 @@ buildModel <- function(){
 # good documentation
 # http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/index.html
 
+# Tooltip for an arbitrary Tk widget, without a tcltk2 dependency.
+# text: a character string, or a function returning the text at hover time
+#       (so the current content of a tclVar is always shown).
+.TkTip <- function(widget, text, delay = 400, wraplength = 400) {
+
+  tip <- NULL   # toplevel of the tooltip
+  aid <- NULL   # id of the pending after event
+
+  hide <- function() {
+    if(!is.null(aid)) { tcltk::tcl("after", "cancel", aid); aid <<- NULL }
+    if(!is.null(tip)) { tcltk::tkdestroy(tip); tip <<- NULL }
+  }
+
+  show <- function() {
+
+    aid <<- NULL
+    txt <- if(is.function(text)) text() else text
+    if(length(txt) != 1L || is.na(txt) || !nzchar(strTrim(txt)))
+      return(invisible())
+
+    tip <<- tcltk::tktoplevel(widget)
+    tcltk::tkwm.overrideredirect(tip, TRUE)
+    try(tcltk::tkwm.attributes(tip, topmost = TRUE), silent = TRUE)
+    if(Sys.info()[["sysname"]] == "Darwin")
+      try(tcltk::tcl("::tk::unsupported::MacWindowStyle", "style", tip,
+                     "help", "noActivates"), silent = TRUE)
+
+    tcltk::tkpack(tcltk::tklabel(tip, text = txt, justify = "left",
+                                 background = "#FFFFE1", foreground = "#333333",
+                                 relief = "solid", borderwidth = 1,
+                                 wraplength = wraplength, padx = 4, pady = 2))
+
+    # place at the mouse pointer, slightly offset, so the window does not end up
+    # under the cursor and trigger <Leave> flickering
+    xy <- as.integer(c(tcltk::tclvalue(tcltk::tkwinfo("pointerx", widget)),
+                       tcltk::tclvalue(tcltk::tkwinfo("pointery", widget))))
+    tcltk::tkwm.geometry(tip, gettextf("+%s+%s", xy[1] + 12, xy[2] + 20))
+  }
+
+  tcltk::tkbind(widget, "<Enter>", function() {
+    hide()
+    aid <<- tcltk::tclvalue(tcltk::tcl("after", delay, show))
+  })
+  tcltk::tkbind(widget, "<Leave>", hide)
+  tcltk::tkbind(widget, "<ButtonPress>", hide)
+
+  invisible(widget)
+}
+
+
 .modelDlg <- function(x, ...){
   
   requireNamespace("tcltk")
@@ -152,14 +202,21 @@ buildModel <- function(){
     lst <- .GetVarName(as.character(tcltk::tkget(tlist.var, 0, "end")))
     
     if (length(var.name) > 0) {
-      txt <- strTrunc(label(x[, strTrim(lst[var.name + 1])]), 30)
-      if(length(txt) == 0) txt <- " "
-      cltxt <- class(x[, strTrim(lst[var.name + 1])])
+      z <- x[, strTrim(lst[var.name + 1])]
+      txt <- label(z)
+      if(length(txt) == 0 || is.na(txt)) txt <- ""
+      cltxt <- class(z)
       if(any(cltxt %in% c("factor","ordered")))
-        cltxt <- paste0(cltxt, "(", max(nlevels(x[, strTrim(lst[var.name + 1])])), ")")
-      tcltk::tclvalue(tflbl) <- gettextf("%s\n  %s", paste(cltxt, collapse=", "), txt)
+        cltxt <- paste0(cltxt, "(", max(nlevels(z)), ")")
+
+      tcltk::tclvalue(tflbl)  <- paste(cltxt, collapse=", ")
+      tcltk::tclvalue(tfdesc) <- gettextf("  %s", strTrunc(txt, 30))
+      tcltk::tclvalue(tftip)  <- txt
+
     } else {
-      tcltk::tclvalue(tflbl) <- "\n"
+      tcltk::tclvalue(tflbl)  <- " "
+      tcltk::tclvalue(tfdesc) <- " "
+      tcltk::tclvalue(tftip)  <- ""
     }
   }
   
@@ -196,7 +253,9 @@ buildModel <- function(){
   tfmodx <- tcltk::tclVar("")
   tflhs <- tcltk::tclVar("")
   tffilter <- tcltk::tclVar("")
-  tflbl <- tcltk::tclVar("\n")
+  tflbl <- tcltk::tclVar(" ")     # class line, black
+  tfdesc <- tcltk::tclVar(" ")    # label text, dark grey (truncated)
+  tftip <- tcltk::tclVar("")      # full label text for the tooltip
   tfframe <- tcltk::tclVar("Variables:")
   # gettextf("Variables (%s):", length(names(x)))
   mod_x <- NA_character_
@@ -273,7 +332,11 @@ buildModel <- function(){
                                   tcltk::tkset(var.scr, ...), background = "white",
                                 exportselection = FALSE, activestyle= "none", highlightthickness=0,
                                 height=20, width=20, font = myfont)
-  tfVarLabel <- tcltk::tklabel(frmVar, justify="left", width=26, anchor="w", textvariable=tflbl, font=myfont)
+  tfVarLabel <- tcltk::tklabel(frmVar, justify="left", width=26, anchor="w",
+                               textvariable=tflbl, font=myfont)
+  tfVarDesc <- tcltk::tklabel(frmVar, justify="left", width=26, anchor="w",
+                              textvariable=tfdesc, font=myfont,
+                              foreground="#555555")
   
   
   
@@ -288,8 +351,13 @@ buildModel <- function(){
   tcltk::tkgrid(tfButSortNone, row=0, column=4, sticky = "n")
   tcltk::tkgrid(tcltk::tklabel(frmVar, text=" "))
   tcltk::tkgrid(tlist.var, var.scr, row=2, columnspan=5, sticky = "news")
-  tcltk::tkgrid(tfVarLabel, row=3, columnspan=5, pady=3, sticky = "es")
+  tcltk::tkgrid(tfVarLabel, row=3, columnspan=5, pady=c(3,0), sticky = "es")
+  tcltk::tkgrid(tfVarDesc, row=4, columnspan=5, pady=c(0,3), sticky = "es")
   tcltk::tkgrid.configure(var.scr, sticky = "news")
+
+  # quicktip showing the untruncated label text
+  .TkTip(tfVarDesc, function() tcltk::tclvalue(tftip))
+  .TkTip(tfVarLabel, function() tcltk::tclvalue(tftip))
   # tcltk2::tk2tip(tlist.var, "List of variables in data frame")
   
   # Buttons

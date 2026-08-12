@@ -1,7 +1,7 @@
 Package: swissValet
 Type: Package
 Title: Interactive Functions to be Used as Shortcuts in 'RStudio'
-Version: 0.0.0.905
+Version: 0.0.0.906
 Authors@R: person(given = "Andri",
                   family = "Signorell",
                   role = c("aut", "cre"),
@@ -16,4 +16,4 @@ BugReports: https://github.com/AndriSignorell/swissValet/issues
 License: GPL (>= 2)
 LazyLoad: yes
 Encoding: UTF-8
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0
