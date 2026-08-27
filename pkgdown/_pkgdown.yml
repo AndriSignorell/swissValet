@@ -1,0 +1,75 @@
+home:
+  title: swissValet
+  description: RStudio addins that turn frequently used inspection functions into single keystrokes
+
+destination: docs
+
+development:
+  mode: auto
+
+template:
+  default_assets: true
+  bootstrap: 5
+  bootswatch: flatly
+
+navbar:
+  structure:
+    left:  [version, home, reference, news]
+    right: [github]
+  components:
+    version:
+      icon: fa-book
+      menu:
+      - text: "Documentation for version of package:"
+      - text: Released
+        href: https://andrisignorell.github.io/swissValet/
+      - text: In-development
+        href: https://andrisignorell.github.io/swissValet/dev/
+
+# About package ==============================================================
+reference:
+- title: Inspection Addins
+  desc: >
+    Addins applying an inspection function to the current editor
+    selection and executing it in the console.
+  contents:
+  # addin.structure -- Structure and summary
+  - xStrX
+  - xSummary
+  - xAbstract
+  # addin.content -- Content and class
+  - xHead
+  - xDesc
+  - xUnclass
+  # addin.action -- Running and plotting
+  - xExample
+  - xPlot
+
+- title: Interactive Dialogs
+  desc: >
+    Tcl/Tk dialogs returning an R expression for the made selection.
+  contents:
+  # dialog.select -- Variable and element selection
+  - selectVarDlg
+  # dialog.order -- Ordering of code elements
+  - .orderSelectionDlg
+
+- title: Editor Utilities
+  desc: >
+    Writing back into the document and converting the selected text.
+  contents:
+  # editor.source -- Objects as reproducible code
+  - flushToSource
+  # editor.unicode -- Unicode conversion
+  - unicodeAddins
+  - escapeUnicode
+  - unescapeUnicode
+
+- title: Data Helpers
+  desc: >
+    Functions used by the addins and useful on their own.
+  contents:
+  # data.subset -- Random subsets
+  - some
+  # data.internal -- Internal helpers
+  - .str1

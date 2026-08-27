@@ -1,345 +1,118 @@
-# swissValet
-
-<img src="man/figures/logo.png" align="right" width="120"/>
+# 📦 swissValet <img src="man/figures/logo.png" align="right" height="139" alt="swissValet logo" />
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/AndriSignorell/swissValet/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AndriSignorell/swissValet/actions)
-[![License: GPL (>=2)](https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
+[![CRAN status](https://www.r-pkg.org/badges/version/swissValet)](https://CRAN.R-project.org/package=swissValet)
+[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 <!-- badges: end -->
 
-`swissValet` is a collection of interactive RStudio helper functions and addins designed to reduce friction during daily data analysis work.
+**Title:** Interactive Functions to be Used as Shortcuts in RStudio\
+**License:** GPL (≥ 2)
 
-The package focuses on:
+## 🧩 Overview
 
-- fast inspection of objects
-- interactive code generation
-- editor utilities
-- plotting helpers
-- reproducible snippets
-- keyboard-driven workflows
-- small ergonomic improvements for RStudio
+`swissValet` turns the inspection functions you type dozens of times a
+day into single keystrokes. Each addin takes the current selection in the
+RStudio editor, wraps it in the corresponding call and executes it
+immediately in the console.
 
-Most functions operate directly on the current editor selection and are intended to be assigned to keyboard shortcuts.
+Select `mtcars`, press your shortcut, and `str(mtcars)` runs — no
+copying, no typing, no losing the selection.
 
----
+The package further contains interactive dialogs for selecting variables
+and sorting code elements, converters between Unicode characters and
+escape sequences, and a routine that writes an existing object back into
+the editor as reproducible source code.
 
-## Installation
+📖 **Repository:** <https://github.com/AndriSignorell/swissValet/>
 
-```r
+## ⚙️ Installation
+
+``` r
+install.packages("swissValet")
+```
+
+Or the development version from GitHub:
+
+``` r
 remotes::install_github("AndriSignorell/swissValet")
 ```
 
----
+## ⌨️ Setting up shortcuts
 
-# Philosophy
+In RStudio: **Tools → Modify Keyboard Shortcuts…**, filter for the addin
+name, and assign a key combination. A layout that keeps the fingers in
+one place works well, for example `Ctrl+Alt+S` for `xStrX`, `Ctrl+Alt+H`
+for `xHead`, `Ctrl+Alt+P` for `xPlot`.
 
-`swissValet` is intentionally pragmatic.
+## 📚 Core Features
 
-The package contains many small utilities that save:
+### 🔹 Inspection Addins
 
-- keystrokes
-- context switching
-- repetitive typing
-- clipboard juggling
-- temporary objects
+Each applies its function to the current editor selection:
 
-Most functions are designed for interactive use inside RStudio.
-
----
-
-# Recommended Setup
-
-The package becomes significantly more useful when functions are mapped to keyboard shortcuts.
-
-In RStudio:
-
-```text
-Tools
-→ Modify Keyboard Shortcuts
-```
-
-Typical examples:
-
-| Shortcut | Function |
+| Addin | Runs |
 |---|---|
-| Ctrl+Shift+S | `xStrX()` |
-| Ctrl+Shift+H | `xHead()` |
-| Ctrl+Shift+D | `xDesc()` |
-| Ctrl+Shift+P | `Plot()` |
-| Ctrl+Shift+L | `sortLines()` |
+| `xStrX()` | `strX()` — structure of the object |
+| `xSummary()` | `summary()` |
+| `xHead()` | `head()` |
+| `xDesc()` | `desc()` |
+| `xAbstract()` | `abstract()` |
+| `xExample()` | `example()` |
+| `xPlot()` | `plot()` |
+| `xUnclass()` | `unclass()` |
+| `xxlView()` | `xlView()` — open in Excel |
 
----
+### 🔹 Interactive Dialogs
 
-# Main Features
+-   `selectVarDlg()` — pick elements, factor levels or data frame
+    columns from a list and get the corresponding R expression, copied
+    to the clipboard
+-   `.orderSelectionDlg()` — choose ascending, descending or random
+    ordering for selected code elements
 
-## Interactive Object Inspection
+### 🔹 Editor Utilities
 
-Quickly inspect selected objects from the editor.
+-   `flushToSource()` — write the selected object back into the document
+    as reproducible code; data frames become a readable `data.frame(...)`
+    call rather than `dput()` output
+-   `toggleUnicodeAddin()` — convert the selection between Unicode
+    characters and escape sequences
 
-```r
-xHead()
-xSummary()
-xStrX()
-xDesc()
-xUnclass()
-xExample()
-```
+### 🔹 Helpers
 
-These functions automatically use the currently selected text in the editor and execute the corresponding command.
+-   `some()` — a random subset of a vector, matrix or data frame, the
+    counterpart to `head()` and `tail()`
+-   `escapeUnicode()`, `unescapeUnicode()`
 
----
+## 🧪 Example
 
-## Better `str()`
+``` r
+library(swissValet)
 
-`strX()` extends `str()` with numbered variables and cleaner output.
-
-```r
-strX(mtcars)
-```
-
-Useful for:
-
-- large data frames
-- quick orientation
-- teaching
-- screenshots
-- debugging
-
----
-
-## Random Sampling
-
-```r
-some(mtcars)
+# a random subset instead of the first rows
+some(mtcars, 5)
 some(letters, 10)
-some(1:100, -5)
+
+# n relative to the object size
+some(1:20, -5)
+
+# Unicode round trip
+escapeUnicode("Schneehöhe")
+unescapeUnicode("Schneeh\\u00f6he")
 ```
 
-Convenient random subsets for:
+## 🧱 The Suite
 
-- exploration
-- testing
-- examples
-- debugging
+`swissValet` uses `bedrock`, `pharos`, `DescToolsX` and `pons` for the
+functions its addins call.
 
----
+## 🙏 Acknowledgements
 
-## Interactive Variable Selection
+Parts of the code and documentation were reviewed with the help of large
+language models (OpenAI Codex, Anthropic Claude). Every suggestion was
+assessed, edited and verified by the maintainer, who remains solely
+responsible for the content of this package.
 
-```r
-selectVarDlg(mtcars)
-```
+## 📜 License
 
-Interactive selection dialog returning ready-to-use R expressions.
-
-Examples:
-
-```r
-c("mpg","hp","wt")
-```
-
-```r
-mtcars[, c("mpg","hp")]
-```
-
-```r
-x %in% c("A","B")
-```
-
----
-
-## Build Model Formulas Interactively
-
-```r
-buildModel()
-```
-
-Opens a graphical model builder for regression formulas.
-
-Features:
-
-- interactive variable selection
-- interactions
-- polynomial terms
-- formula editing
-- keyboard shortcuts
-- automatic model code generation
-
----
-
-## Reproducible Object Export
-
-```r
-flushToSource()
-```
-
-Converts selected objects into reproducible source code and inserts them into the editor.
-
-Data frames are rendered as readable:
-
-```r
-data.frame(...)
-```
-
-instead of verbose `dput(structure(...))`.
-
----
-
-## Line Utilities
-
-```r
-SortAsc()
-SortDesc()
-Shuffle()
-sortLines()
-```
-
-Sort or shuffle selected editor lines interactively.
-
----
-
-## File Helpers
-
-```r
-FileOpen()
-fileSaveAs()
-FileImport()
-FileBrowserOpen()
-```
-
-Convenience wrappers for:
-
-- opening files
-- importing data
-- exporting objects
-- generating reproducible file paths
-
----
-
-## Plotting Helpers
-
-```r
-Plot()
-PlotD()
-PlotPar()
-PlotMar()
-SavePlot()
-```
-
-Small utilities for faster plotting workflows.
-
----
-
-## Color & Symbol Pickers
-
-```r
-ColorDlg()
-colPicker()
-pchPicker()
-```
-
-Interactive graphical pickers for:
-
-- colors
-- plotting symbols
-- graphical parameters
-
----
-
-# Tcl/Tk Dialog System
-
-The package contains a growing collection of custom Tcl/Tk dialogs:
-
-- centered windows
-- keyboard navigation
-- ESC/Enter support
-- clipboard integration
-- modernized layouts
-- reusable helper infrastructure
-
-Examples:
-
-- `.selectListDlg()`
-- `.orderSelectionDlg()`
-- `.modelDlg()`
-
----
-
-# Clipboard Integration
-
-Many functions automatically copy generated expressions to the clipboard.
-
-Clipboard support uses the modern `clipr` package and fails gracefully on unsupported systems.
-
----
-
-# Example Workflow
-
-Select text in the editor:
-
-```r
-mtcars
-```
-
-Press shortcut assigned to:
-
-```r
-xStrX()
-```
-
-Result:
-
-```r
-strX(mtcars)
-```
-
-is immediately executed in the console.
-
----
-
-# Dependencies
-
-`swissValet` builds upon:
-
-- `rstudioapi`
-- `tcltk`
-- `clipr`
-- `cli`
-- `writexl`
-- `bedrock`
-- `aurora`
-- `DescToolsX`
-
----
-
-# Status
-
-`swissValet` is under active development and intentionally experimental in parts.
-
-The package prioritizes:
-
-- interactive ergonomics
-- speed
-- convenience
-- developer productivity
-
-over strict API stability.
-
----
-
-# Author
-
-Andri Signorell
-
----
-
-# License
-
-GPL (>= 2)
-
----
-
-# Links
-
-- GitHub: https://github.com/AndriSignorell/swissValet
-- Issues: https://github.com/AndriSignorell/swissValet/issues
+GPL (≥ 2)

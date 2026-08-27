@@ -1,17 +1,28 @@
 Package: swissValet
 Type: Package
 Title: Interactive Functions to be Used as Shortcuts in 'RStudio'
-Version: 0.0.0.907
+Version: 0.0.0.908
 Authors@R: person(given = "Andri",
                   family = "Signorell",
                   role = c("aut", "cre"),
                   email = "andri@signorell.net",
                   comment = c(ORCID = "0000-0003-4311-1969"))
-Description: 'RStudio' as of recently offers the option to define addins and assign shortcuts to them. This package contains addins for a few most frequently used functions in a data scientist's (at least mine) daily work (like str(), example(), plot(), head(), view(), desc()). Most of these functions will use the current selection in the editor window and send the specific command to the console while instantly executing it. Assigning shortcuts to these addins will save you quite a few keystrokes.
-Depends: base, stats, R (>= 4.2.0)
-Imports: DescToolsX, pharos, bedrock, rstudioapi (>= 0.1), 
+Description: Provides addins for 'RStudio' that apply frequently needed
+    inspection functions to the current editor selection and execute
+    them in the console, among them str(), example(), plot(), head(),
+    summary() and unclass(). Assigning keyboard shortcuts to these
+    addins turns a repeated select-copy-wrap-run cycle into a single
+    keystroke. The package further contains interactive Tcl/Tk dialogs
+    for selecting variables and for sorting code elements, converters
+    between Unicode characters and escape sequences, and a routine that
+    writes a selected object back into the editor as reproducible
+    source code.
+Depends: R (>= 4.2.0)
+Imports: stats, DescToolsX, pharos, bedrock, rstudioapi (>= 0.1), 
          writexl, foreign, tools, tcltk, cli, clipr
-URL: https://github.com/AndriSignorell/swissValet/
+Remotes: 
+    AndriSignorell/bedrock, AndriSignorell/DescToolsX, AndriSignorell/pharos 
+URL: https://github.com/AndriSignorell/swissValet/, https://andrisignorell.github.io/swissValet/
 BugReports: https://github.com/AndriSignorell/swissValet/issues
 License: GPL (>= 2)
 LazyLoad: yes
